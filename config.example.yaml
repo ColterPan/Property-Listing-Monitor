@@ -7,19 +7,25 @@ log_level: INFO               # DEBUG surfaces constructed search URLs and card 
 notify_on_first_run: false     # false = silently establish a baseline on a search's first run
 self_alert_cooldown_hours: 6  # minimum gap between repeated "scraper is broken" Telegram alerts
 
+# portal: 99co | propertyguru
+#   99co is recommended -- propertyguru serves a Cloudflare bot-check
+#   challenge to plain headless browsers (see docs/propertyguru_notes.md),
+#   so its scraper will currently fail every run until/unless that's solved
+#   without resorting to anti-detection evasion tooling. 99co has been
+#   verified to work (see docs/99co_notes.md).
 searches:
   - name: "Tampines 3-room resale"
-    portal: propertyguru
+    portal: 99co
     intent: sale               # rent | sale
-    property_type: hdb          # hdb | condo | landed
+    property_type: hdb          # hdb | condo | landed (not yet filtered at query level for 99co -- see docs/99co_notes.md)
     location: "Tampines"
     min_price: 400000
     max_price: 550000
     # notify_on_first_run: true  # optional per-search override of the global default
-    # max_pages: 1                # how many results pages to check per run
+    # max_pages: 1                # how many results pages (36 listings each) to check per run
 
   - name: "Queenstown condo rental"
-    portal: propertyguru
+    portal: 99co
     intent: rent
     property_type: condo
     location: "Queenstown"
