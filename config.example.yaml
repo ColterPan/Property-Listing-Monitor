@@ -1,0 +1,27 @@
+# Copy this file to config.yaml and edit to taste.
+# Secrets (Telegram bot token / chat ID) go in .env, NOT here -- see .env.example.
+
+poll_interval_minutes: 20   # informational only; actual cadence is set by Task Scheduler/cron
+headless: true               # Playwright launch mode; set false to watch the browser while debugging
+log_level: INFO               # DEBUG surfaces constructed search URLs and card parse counts
+notify_on_first_run: false     # false = silently establish a baseline on a search's first run
+self_alert_cooldown_hours: 6  # minimum gap between repeated "scraper is broken" Telegram alerts
+
+searches:
+  - name: "Tampines 3-room resale"
+    portal: propertyguru
+    intent: sale               # rent | sale
+    property_type: hdb          # hdb | condo | landed
+    location: "Tampines"
+    min_price: 400000
+    max_price: 550000
+    # notify_on_first_run: true  # optional per-search override of the global default
+    # max_pages: 1                # how many results pages to check per run
+
+  - name: "Queenstown condo rental"
+    portal: propertyguru
+    intent: rent
+    property_type: condo
+    location: "Queenstown"
+    min_price: 3000
+    max_price: 4500
